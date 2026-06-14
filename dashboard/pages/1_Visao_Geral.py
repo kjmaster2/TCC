@@ -20,10 +20,16 @@ st.divider()
 # =========================================================
 # CARREGAMENTO DOS DADOS
 # =========================================================
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 @st.cache_data
 def load_data():
 
-    df = pd.read_csv("dados/dados_tratados.csv")
+    arquivo = BASE_DIR / "dados" / "dados_tratados.csv"
+
+    df = pd.read_csv(arquivo)
 
     df.columns = df.columns.str.strip()
 
