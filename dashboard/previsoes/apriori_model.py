@@ -1,7 +1,6 @@
 from mlxtend.frequent_patterns import apriori, association_rules
 import pandas as pd
 
-
 def executar_apriori(
     df,
     defeito_alvo,
@@ -188,8 +187,16 @@ def executar_apriori(
 
         &
 
+        (regras['lift'] < 5)
+    
+        &
+
         # confiança mínima
         (regras["confidence"] >= min_confidence)
+
+        &
+
+        (regras["confidence"] < 5)
 
         &
 
@@ -238,9 +245,10 @@ def executar_apriori(
 
     regras = regras.sort_values(
         by=[
+            "support",
             "lift",
-            "confidence",
-            "support"
+            "confidence"
+            
         ],
         ascending=False
     )

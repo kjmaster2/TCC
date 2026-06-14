@@ -177,8 +177,10 @@ if st.button(
 
         st.subheader("Top Probabilidades")
 
-        st.bar_chart(
-            top10.set_index("Defeito")
+        st.dataframe(
+            top10,
+            use_container_width=True,
+            hide_index=True
         )
 
     with col_tabela:
