@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from previsoes.apriori_model import executar_apriori
 from previsoes.logistic_analysis import executar_regressao_logistica_analitica
+from pathlib import Path
 
 # =========================================================
 # CONFIG
@@ -16,9 +17,14 @@ st.divider()
 # LOAD DATA
 # =========================================================
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("dados/problemas_filtrados.csv")
+
+    arquivo = BASE_DIR / "dados" / "problemas_filtrados.csv"
+
+    df = pd.read_csv(arquivo)
     df.columns = df.columns.str.strip()
 
     # DATA
